@@ -2,6 +2,9 @@ import streamlit as st
 import requests
 import pandas as pd
 
+# Define your live backend URL from Render
+BACKEND_URL = "https://sih2026-3lya.onrender.com"
+
 st.set_page_config(
     page_title="GraminSarthi-AI | Digital Business Advisor", 
     page_icon="🇮🇳", 
@@ -86,7 +89,7 @@ if not st.session_state["logged_in"]:
             if st.button("Access Portal 🚀"):
                 if login_user.strip() and login_pass.strip():
                     try:
-                        res = requests.post("http://localhost:8000/api/login", json={"username": login_user, "password": login_pass})
+                        res = requests.post(f"{BACKEND_URL}/api/login", json={"username": login_user, "password": login_pass})
                         if res.status_code == 200:
                             st.session_state["logged_in"] = True
                             st.session_state["username"] = login_user
@@ -108,7 +111,7 @@ if not st.session_state["logged_in"]:
             if st.button("Register Account 📝"):
                 if reg_user.strip() and reg_pass.strip():
                     try:
-                        res = requests.post("http://localhost:8000/api/register", json={"username": reg_user, "email": reg_email, "password": reg_pass})
+                        res = requests.post(f"{BACKEND_URL}/api/register", json={"username": reg_user, "email": reg_email, "password": reg_pass})
                         if res.status_code == 200:
                             st.success("Registration successful! Please switch to 'Sign In' above.")
                         else:
@@ -342,7 +345,6 @@ else:
             max_capital = st.number_input(t["lbl_cap"], value=300000, step=10000)
             skill_level = st.selectbox(t["lbl_skill"], ["Unskilled / Beginner", "Semi-Skilled", "Skilled"])
 
-        # Fully interactive checkbox to toggle between all sectors or filtering
         explore_all = st.checkbox(t["chk_all"], value=True)
         business_type = None
         if not explore_all:
@@ -350,7 +352,7 @@ else:
 
         if st.button(t["btn_rep"]):
             try:
-                res = requests.post("http://localhost:8000/api/recommend-all-businesses", json={"state": state, "district": district, "max_capital": max_capital, "skill_level": skill_level})
+                res = requests.post(f"{BACKEND_URL}/api/recommend-all-businesses", json={"state": state, "district": district, "max_capital": max_capital, "skill_level": skill_level})
                 if res.status_code == 200:
                     data = res.json()
                     st.success(data["region_context"])
@@ -383,8 +385,10 @@ else:
                                 st.markdown("❌ **Cons / Risks:**")
                                 for con in sector['cons']:
                                     st.markdown(f"- {con}")
+                else:
+                    st.error("Could not fetch recommendations from server.")
             except Exception as e:
-                st.error(f"Error: {e}")
+                st.error(f"Error connecting to backend: {e}")
 
     with tab2:
         st.markdown(f"### {t['h_fin']}")
@@ -400,9 +404,11 @@ else:
         if st.button(t["btn_fin"]):
             payload = {"project_cost": project_cost, "own_contribution": own_contribution, "annual_revenue": annual_revenue, "annual_expenses": annual_expenses, "scheme_type": scheme_type}
             try:
-                response = requests.post("http://localhost:8000/api/analyze-financials", json=payload)
+                response = requests.post(f"{BACKEND_URL}/api/analyze-financials", json=payload)
                 if response.status_code == 200:
                     st.session_state["latest_analysis"] = {**payload, **response.json()}
+                else:
+                    st.error("Failed to process financial analysis.")
             except Exception:
                 st.error("Error running analysis.")
 
@@ -424,7 +430,7 @@ else:
 
             if st.button(t["btn_save"]):
                 try:
-                    requests.post("http://localhost:8000/api/save-record", json={"username": st.session_state["username"], **res})
+                    requests.post(f"{BACKEND_URL}/api/save-record", json={"username": st.session_state["username"], **res})
                     st.success("Saved successfully!")
                 except Exception:
                     st.error("Error saving record.")
@@ -432,7 +438,7 @@ else:
     with tab3:
         st.markdown(f"### {t['h_rec']}")
         try:
-            rec_res = requests.get(f"http://localhost:8000/api/records/{st.session_state['username']}")
+            rec_res = requests.get(f"{BACKEND_URL}/api/records/{st.session_state['username']}")
             if rec_res.status_code == 200 and rec_res.json():
                 st.dataframe(pd.DataFrame(rec_res.json()), use_container_width=True)
             else:
@@ -472,13 +478,13 @@ else:
             with st.chat_message(chat["role"]):
                 st.markdown(chat["content"])
 
-        if user_input := st.chat_input(t["chat_ph"]):
+        if user_input := st.chat_input(t["chat_ph"], key="chat_input_field"):
             st.session_state["chat_messages"].append({"role": "user", "content": user_input})
             with st.chat_message("user"):
                 st.markdown(user_input)
 
             try:
-                res = requests.post("http://localhost:8000/api/ai-chat", json={"message": user_input, "username": st.session_state["username"]})
+                res = requests.post(f"{BACKEND_URL}/api/ai-chat", json={"message": user_input, "username": st.session_state["username"]})
                 ai_reply = res.json()["reply"] if res.status_code == 200 else "Server connection error."
             except Exception:
                 ai_reply = "Could not reach backend service."

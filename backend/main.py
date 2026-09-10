@@ -109,35 +109,53 @@ def login(user: UserAuth):
 
 @app.post("/api/recommend-all-businesses")
 def recommend_businesses(req: RecommendationRequest):
+    # Expanded master pool with multiple distinct ideas per category tailored to regional factors
     master_pool = [
+        # --- Agriculture & Allied ---
         {
             "category": "Agriculture & Allied",
-            "business_type": "Smart Dairy & Milk Collection Center",
-            "risk_to_profit_ratio": "Low Risk / High Demand",
+            "business_type": "Smart Dairy & Automated Milk Collection Center",
+            "risk_to_profit_ratio": "Low Risk / High Daily Demand",
             "best_scheme": "National Livestock Mission (NLM)",
             "nodal_agency": "Ministry of Fisheries, Animal Husbandry & Dairying",
             "scheme_subsidy": "Up to 50% capital subsidy",
-            "estimated_setup_cost": 250000,
-            "active_units": f"140+ active hubs in {req.district}",
-            "regional_growth": "+14.2% YoY growth",
+            "estimated_setup_cost": 220000,
+            "active_units": f"140+ active hubs in {req.district}, {req.state}",
+            "regional_growth": "+14.2% YoY local consumption",
             "competitor_health": "Stable cooperative demand",
-            "pros": ["Daily cash flow", "High local consumption", "Government feed support"],
-            "cons": ["Requires cold chain maintenance", "Perishable commodity"]
+            "pros": ["Daily cash flow", "High local demand", "Government feed support"],
+            "cons": ["Requires continuous cold chain", "Perishable goods management"]
         },
         {
             "category": "Agriculture & Allied",
-            "business_type": "Organic Vermicomposting & Bio-Fertilizer Unit",
+            "business_type": "Organic Vermicomposting & Bio-Fertilizer Production",
             "risk_to_profit_ratio": "Low Risk / Steady Margin",
             "best_scheme": "Paramparagat Krishi Vikas Yojana (PKVY)",
             "nodal_agency": "Ministry of Agriculture & Farmers Welfare",
             "scheme_subsidy": "₹50,000 per hectare cluster support",
-            "estimated_setup_cost": 120000,
+            "estimated_setup_cost": 110000,
             "active_units": f"65+ local organic farms in {req.district}",
-            "regional_growth": "+18.5% organic shift",
+            "regional_growth": "+18.5% shift towards chemical-free farming",
             "competitor_health": "Low corporate competition",
-            "pros": ["Low initial investment", "Eco-friendly raw material supply"],
-            "cons": ["Seasonal preparation cycle", "Bulk storage needed"]
+            "pros": ["Low initial investment", "High availability of raw farm waste"],
+            "cons": ["Seasonal preparation cycles", "Bulk storage required"]
         },
+        {
+            "category": "Agriculture & Allied",
+            "business_type": "Solar-Powered Cold Storage & Horticulture Aggregation",
+            "risk_to_profit_ratio": "Moderate Risk / High Value",
+            "best_scheme": "Agriculture Infrastructure Fund (AIF)",
+            "nodal_agency": "Ministry of Agriculture",
+            "scheme_subsidy": "Interest subvention of 3% up to ₹2 Crore",
+            "estimated_setup_cost": 290000,
+            "active_units": f"25+ storage units across {req.state}",
+            "regional_growth": "+22.0% horticultural output",
+            "competitor_health": "High demand during peak harvest",
+            "pros": ["Prevents crop wastage", "Strong institutional credit backing"],
+            "cons": ["Higher upfront capital requirement", "Power backup reliance"]
+        },
+
+        # --- Manufacturing & Handloom ---
         {
             "category": "Manufacturing & Handloom",
             "business_type": "Handloom Weaving & Traditional Handicrafts Studio",
@@ -145,13 +163,29 @@ def recommend_businesses(req: RecommendationRequest):
             "best_scheme": "National Handloom Development Programme",
             "nodal_agency": "Ministry of Textiles",
             "scheme_subsidy": "Mudra Loan support with 3% interest subvention",
-            "estimated_setup_cost": 180000,
+            "estimated_setup_cost": 175000,
             "active_units": f"90+ artisan clusters in {req.district}",
             "regional_growth": "+9.8% e-commerce export demand",
             "competitor_health": "Strong cultural heritage demand",
             "pros": ["GI tag branding leverage", "High export margin potential"],
-            "cons": ["High manual labor dependency", "Design trend shifts"]
+            "cons": ["High manual labor dependency", "Changing design trends"]
         },
+        {
+            "category": "Manufacturing & Handloom",
+            "business_type": "Eco-Friendly Bamboo & Jute Craft Manufacturing Unit",
+            "risk_to_profit_ratio": "Low Risk / Sustainable Sector",
+            "best_scheme": "National Bamboo Mission (NBM)",
+            "nodal_agency": "Ministry of Agriculture & Farmers Welfare",
+            "scheme_subsidy": "Up to 50% assistance for plantation & processing",
+            "estimated_setup_cost": 140000,
+            "active_units": f"40+ workshops in {req.district}",
+            "regional_growth": "+27.5% plastic ban substitution",
+            "competitor_health": "Growing eco-conscious consumer base",
+            "pros": ["Abundant local raw materials", "Strong government push against plastics"],
+            "cons": ["Requires specialized shaping tools", "Skill training needed"]
+        },
+
+        # --- Retail & Services ---
         {
             "category": "Retail & Services",
             "business_type": "Digital Common Service & Rural E-Commerce Hub",
@@ -159,37 +193,70 @@ def recommend_businesses(req: RecommendationRequest):
             "best_scheme": "PM Vishwakarma Scheme / CSC Scheme",
             "nodal_agency": "Ministry of Electronics and IT",
             "scheme_subsidy": "Toolkit incentive up to ₹15,000 + Low interest credit",
-            "estimated_setup_cost": 95000,
+            "estimated_setup_cost": 90000,
             "active_units": f"210+ digital kiosks in {req.district}",
-            "regional_growth": "+25.4% digital adoption",
+            "regional_growth": "+25.4% digital service adoption in {req.state}",
             "competitor_health": "Essential utility requirement",
-            "pros": ["Multiple revenue streams", "Constant footfall"],
-            "cons": ["Internet dependency", "Local service competition"]
+            "pros": ["Multiple transaction revenue streams", "Constant daily footfall"],
+            "cons": ["Internet connectivity dependency", "Local kiosk competition"]
         },
         {
+            "category": "Retail & Services",
+            "business_type": "Solar Panel Maintenance & Rural Energy Service Station",
+            "risk_to_profit_ratio": "Low Risk / High Future Demand",
+            "best_scheme": "PM-KUSUM Scheme",
+            "nodal_agency": "Ministry of New and Renewable Energy (MNRE)",
+            "scheme_subsidy": "Up to 30% central financial assistance",
+            "estimated_setup_cost": 150000,
+            "active_units": f"35+ green energy providers in {req.state}",
+            "regional_growth": "+40.0% solar pump installations",
+            "competitor_health": "Very low local technical competition",
+            "pros": ["Rapidly expanding clean energy market", "High maintenance service margins"],
+            "cons": ["Requires technical training for staff", "Initial tool investment"]
+        },
+
+        # --- Food Processing & Dairy ---
+        {
             "category": "Food Processing & Dairy",
-            "business_type": "Millet Processing & Packaging Micro-Enterprise",
-            "risk_to_profit_ratio": "Low Risk / Trending Sector",
+            "business_type": "Millet Processing & Value-Added Packaging Unit",
+            "risk_to_profit_ratio": "Low Risk / Trending Health Sector",
             "best_scheme": "PM Formalization of Micro Food Processing Enterprises (PMFME)",
             "nodal_agency": "Ministry of Food Processing Industries",
             "scheme_subsidy": "35% credit-linked subsidy up to ₹10 Lakh",
-            "estimated_setup_cost": 270000,
+            "estimated_setup_cost": 260000,
             "active_units": f"45+ modern mills in {req.district}",
-            "regional_growth": "+31.0% health food boom",
-            "competitor_health": "Rising consumer health preference",
-            "pros": ["High government backing for millets", "Long shelf life products"],
-            "cons": ["Machinery upkeep costs", "FSSAI compliance compliance required"]
+            "regional_growth": "+31.0% superfood & millet boom",
+            "competitor_health": "Strong backing from national nutrition drives",
+            "pros": ["High government backing", "Long shelf-life packaged goods"],
+            "cons": ["FSSAI compliance licensing required", "Machinery maintenance cost"]
+        },
+        {
+            "category": "Food Processing & Dairy",
+            "business_type": "Rural Fruit Pulp Extraction & Pickle Micro-Enterprise",
+            "risk_to_profit_ratio": "Low Risk / High Seasonal Margin",
+            "best_scheme": "Mission Organic Value Chain Development (MOVCDNER)",
+            "nodal_agency": "Ministry of Food Processing Industries",
+            "scheme_subsidy": "Up to 50% assistance for value addition units",
+            "estimated_setup_cost": 130000,
+            "active_units": f"55+ local units in {req.district}",
+            "regional_growth": "+16.8% processed food demand",
+            "competitor_health": "Steady traditional market demand",
+            "pros": ["Utilizes abundant regional seasonal fruits", "Low waste output"],
+            "cons": ["Seasonal crop availability variations", "Glass jar packaging care"]
         }
     ]
 
+    # Filter by category if selected
     filtered = [b for b in master_pool if req.category == "All Categories" or b["category"] == req.category]
+    
+    # Filter by capital constraint
     filtered = [b for b in filtered if b["estimated_setup_cost"] <= req.max_capital]
 
     if not filtered:
         filtered = master_pool[:2]
 
     return {
-        "region_context": f"📍 AI Market Intelligence Report for {req.district}, {req.state} | Skill Target: {req.skill_level}",
+        "region_context": f"📍 Multi-Idea Intelligence Report for {req.district}, {req.state} | Skill Level: {req.skill_level} | Capital Limit: ₹{req.max_capital:,.0f}",
         "sectors": filtered
     }
 

@@ -109,7 +109,6 @@ def login(user: UserAuth):
 
 @app.post("/api/recommend-all-businesses")
 def recommend_businesses(req: RecommendationRequest):
-    # Expanded AI generation database based on category & capital limits
     master_pool = [
         {
             "category": "Agriculture & Allied",
@@ -183,14 +182,10 @@ def recommend_businesses(req: RecommendationRequest):
         }
     ]
 
-    # Filter by category if selected
     filtered = [b for b in master_pool if req.category == "All Categories" or b["category"] == req.category]
-    
-    # Filter by capital constraint
     filtered = [b for b in filtered if b["estimated_setup_cost"] <= req.max_capital]
 
     if not filtered:
-        # Fallback if strict capital filter yields 0
         filtered = master_pool[:2]
 
     return {

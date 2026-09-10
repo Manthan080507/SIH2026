@@ -64,7 +64,7 @@ class FinancialRequest(BaseModel):
     own_contribution: float
     annual_revenue: float
     annual_expenses: float
-    scheme_type: str = "general"
+    scheme_type: str = "pm_mudra"
 
 class RecordSaveRequest(BaseModel):
     username: str
@@ -119,6 +119,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Fisheries, Animal Husbandry & Dairying",
             "scheme_subsidy": "Up to 50% capital subsidy",
             "estimated_setup_cost": 220000,
+            "skill_requirement": "Unskilled / Beginner",
             "active_units": f"140+ active hubs in {req.district}, {req.state}",
             "regional_growth": "+14.2% YoY local consumption",
             "competitor_health": "Stable cooperative demand",
@@ -133,6 +134,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Agriculture & Farmers Welfare",
             "scheme_subsidy": "₹50,000 per hectare cluster support",
             "estimated_setup_cost": 110000,
+            "skill_requirement": "Unskilled / Beginner",
             "active_units": f"65+ local organic farms in {req.district}",
             "regional_growth": "+18.5% shift towards chemical-free farming",
             "competitor_health": "Low corporate competition",
@@ -147,6 +149,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Agriculture",
             "scheme_subsidy": "Interest subvention of 3% up to ₹2 Crore",
             "estimated_setup_cost": 290000,
+            "skill_requirement": "Intermediate / Skilled",
             "active_units": f"25+ storage units across {req.state}",
             "regional_growth": "+22.0% horticultural output",
             "competitor_health": "High demand during peak harvest",
@@ -163,6 +166,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Textiles",
             "scheme_subsidy": "Mudra Loan support with 3% interest subvention",
             "estimated_setup_cost": 175000,
+            "skill_requirement": "Intermediate / Skilled",
             "active_units": f"90+ artisan clusters in {req.district}",
             "regional_growth": "+9.8% e-commerce export demand",
             "competitor_health": "Strong cultural heritage demand",
@@ -177,6 +181,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Agriculture & Farmers Welfare",
             "scheme_subsidy": "Up to 50% assistance for plantation & processing",
             "estimated_setup_cost": 140000,
+            "skill_requirement": "Unskilled / Beginner",
             "active_units": f"40+ workshops in {req.district}",
             "regional_growth": "+27.5% plastic ban substitution",
             "competitor_health": "Growing eco-conscious consumer base",
@@ -193,6 +198,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Electronics and IT",
             "scheme_subsidy": "Toolkit incentive up to ₹15,000 + Low interest credit",
             "estimated_setup_cost": 90000,
+            "skill_requirement": "Unskilled / Beginner",
             "active_units": f"210+ digital kiosks in {req.district}",
             "regional_growth": f"+25.4% digital service adoption in {req.state}",
             "competitor_health": "Essential utility requirement",
@@ -207,6 +213,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of New and Renewable Energy (MNRE)",
             "scheme_subsidy": "Up to 30% central financial assistance",
             "estimated_setup_cost": 150000,
+            "skill_requirement": "Intermediate / Skilled",
             "active_units": f"35+ green energy providers in {req.state}",
             "regional_growth": "+40.0% solar pump installations",
             "competitor_health": "Very low local technical competition",
@@ -223,6 +230,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Food Processing Industries",
             "scheme_subsidy": "35% credit-linked subsidy up to ₹10 Lakh",
             "estimated_setup_cost": 260000,
+            "skill_requirement": "Unskilled / Beginner",
             "active_units": f"45+ modern mills in {req.district}",
             "regional_growth": "+31.0% superfood & millet boom",
             "competitor_health": "Strong backing from national nutrition drives",
@@ -237,6 +245,7 @@ def recommend_businesses(req: RecommendationRequest):
             "nodal_agency": "Ministry of Food Processing Industries",
             "scheme_subsidy": "Up to 50% assistance for value addition units",
             "estimated_setup_cost": 130000,
+            "skill_requirement": "Unskilled / Beginner",
             "active_units": f"55+ local units in {req.district}",
             "regional_growth": "+16.8% processed food demand",
             "competitor_health": "Steady traditional market demand",
@@ -245,21 +254,40 @@ def recommend_businesses(req: RecommendationRequest):
         }
     ]
 
+    # 1. Filter by category
     filtered = [b for b in master_pool if req.category == "All Categories" or b["category"] == req.category]
+    
+    # 2. Filter by maximum capital investment limit
     filtered = [b for b in filtered if b["estimated_setup_cost"] <= req.max_capital]
+
+    # 3. Adaptively filter/prioritize by skill level if user selected beginner/unskilled
+    if req.skill_level == "Unskilled / Beginner":
+        beginner_filtered = [b for b in filtered if b.get("skill_requirement") == "Unskilled / Beginner"]
+        if beginner_filtered:
+            filtered = beginner_filtered
 
     if not filtered:
         filtered = master_pool[:2]
 
     return {
-        "region_context": f"📍 Multi-Idea Intelligence Report for {req.district}, {req.state} | Skill Level: {req.skill_level} | Capital Limit: ₹{req.max_capital:,.0f}",
+        "region_context": f"📍 Intelligence Report for {req.district}, {req.state} | Skill: {req.skill_level} | Capital Limit: ₹{req.max_capital:,.0f}",
         "sectors": filtered
     }
 
 @app.post("/api/analyze-financials")
 def analyze_financials(req: FinancialRequest):
     loan_required = max(0.0, req.project_cost - req.own_contribution)
-    interest_rate = 6.0 if req.scheme_type == "swarnima" else 9.0
+    
+    scheme_rates = {
+        "pm_mudra": 8.5,
+        "stand_up_india": 7.5,
+        "pmegp": 8.0,
+        "pmfme": 8.25,
+        "swarnima": 6.0,
+        "general_loan": 10.5
+    }
+    
+    interest_rate = scheme_rates.get(req.scheme_type, 8.5)
     monthly_interest = (interest_rate / 100) / 12
     tenure_months = 60
     
@@ -283,7 +311,8 @@ def analyze_financials(req: FinancialRequest):
         "status": status,
         "own_contribution": req.own_contribution,
         "annual_revenue": req.annual_revenue,
-        "annual_expenses": req.annual_expenses
+        "annual_expenses": req.annual_expenses,
+        "scheme_type": req.scheme_type
     }
 
 @app.post("/api/save-record")

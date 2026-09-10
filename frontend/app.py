@@ -139,19 +139,18 @@ else:
     t = {
         "English": {
             "sub": "Digital Business Advisor & Government Scheme Matcher for Micro-Entrepreneurs",
-            "tab1": "🤖 Sector & Scheme Intelligence",
+            "tab1": "🤖 AI Sector & Scheme Intelligence",
             "tab2": "📊 Financial Simulator",
             "tab3": "📂 Saved Records",
             "tab4": "📈 Business Ledger",
             "tab5": "💬 AI Sarthi Chat",
-            "h_market": "Regional Market Intelligence & Scheme Discovery",
+            "h_market": "Regional AI Market Intelligence & Multi-Idea Discovery",
             "lbl_state": "State Region",
             "lbl_dist": "District Selection",
             "lbl_cap": "Maximum Capital Investment (₹)",
             "lbl_skill": "Entrepreneur Skill Level",
-            "chk_all": "🔍 Explore ALL Business Sectors Simultaneously",
-            "lbl_biz": "Filter Specific Sector",
-            "btn_rep": "Generate Advisory Report",
+            "lbl_cat": "Select Business Category",
+            "btn_rep": "Generate AI Business Ideas",
             "h_fin": "Financial Feasibility & DSCR Calculator",
             "lbl_cost": "Total Project Cost (₹)",
             "lbl_contrib": "Own Contribution (₹)",
@@ -174,19 +173,18 @@ else:
         },
         "हिंदी (Hindi)": {
             "sub": "सूक्ष्म उद्यमियों के लिए डिजिटल बिजनेस सलाहकार और सरकारी योजना मैचर",
-            "tab1": "🤖 क्षेत्र और योजना इंटेलिजेंस",
+            "tab1": "🤖 एआई क्षेत्र और योजना इंटेलिजेंस",
             "tab2": "📊 वित्तीय सिम्युलेटर",
             "tab3": "📂 सहेजे गए रिकॉर्ड",
             "tab4": "📈 बिजनेस बहीखाता",
             "tab5": "💬 एआई सारथी चैट",
-            "h_market": "क्षेत्रीय बाज़ार इंटेलिजेंस और योजना खोज",
+            "h_market": "क्षेत्रीय एआई बाज़ार इंटेलिजेंस और बहु-विचार खोज",
             "lbl_state": "राज्य क्षेत्र",
             "lbl_dist": "जिला चयन",
             "lbl_cap": "अधिकतम पूंजी निवेश (₹)",
             "lbl_skill": "उद्यमी कौशल स्तर",
-            "chk_all": "🔍 एकसाथ सभी व्यवसाय क्षेत्रों का अन्वेषण करें",
-            "lbl_biz": "विशिष्ट क्षेत्र फ़िल्टर करें",
-            "btn_rep": "सलाहकार रिपोर्ट तैयार करें",
+            "lbl_cat": "व्यवसाय श्रेणी चुनें",
+            "btn_rep": "एआई व्यावसायिक विचार उत्पन्न करें",
             "h_fin": "वित्तीय व्यवहार्यता और DSCR कैलकुलेटर",
             "lbl_cost": "कुल परियोजना लागत (₹)",
             "lbl_contrib": "स्वयं का योगदान (₹)",
@@ -209,19 +207,18 @@ else:
         },
         "ಕನ್ನಡ (Kannada)": {
             "sub": "ಸೂಕ್ಷ್ಮ ಉದ್ಯಮಿಗಳಿಗಾಗಿ ಡಿಜಿಟಲ್ ವ್ಯಾಪಾರ ಸಲಹೆಗಾರ ಮತ್ತು ಸರ್ಕಾರಿ ಯೋಜನೆ ಹೊಂದಾಣಿಕೆದಾರ",
-            "tab1": "🤖 ವಲಯ ಮತ್ತು ಯೋಜನೆ ಗುಪ್ತಚರ",
+            "tab1": "🤖 AI ವಲಯ ಮತ್ತು ಯೋಜನೆ ಗುಪ್ತಚರ",
             "tab2": "📊 ಹಣಕಾಸು ಸಿಮ್ಯುಲೇಟರ್",
             "tab3": "📂 ಉಳಿಸಿದ ದಾಖಲೆಗಳು",
             "tab4": "📈 ವ್ಯಾಪಾರ ಲೆಡ್ಜರ್",
             "tab5": "💬 AI ಸಾರಥಿ ಚಾಟ್",
-            "h_market": "ಪ್ರಾದೇಶಿಕ ಮಾರುಕಟ್ಟೆ ಗುಪ್ತಚರ ಮತ್ತು ಯೋಜನೆ ಅನ್ವೇಷಣೆ",
+            "h_market": "ಪ್ರಾದೇಶಿಕ AI ಮಾರುಕಟ್ಟೆ ಗುಪ್ತಚರ ಮತ್ತು ಬಹು-ಐಡಿಯಾ ಅನ್ವೇಷಣೆ",
             "lbl_state": "ರಾಜ್ಯ ಪ್ರದೇಶ",
             "lbl_dist": "ಜಿಲ್ಲೆ ಆಯ್ಕೆ",
             "lbl_cap": "ಗರಿಷ್ಠ ಬಂಡವಾಳ ಹೂಡಿಕೆ (₹)",
             "lbl_skill": "ಉದ್ಯಮಿ ಕೌಶಲ್ಯ ಮಟ್ಟ",
-            "chk_all": "🔍 ಎಲ್ಲಾ ವ್ಯಾಪಾರ ವಲಯಗಳನ್ನು ಏಕಕಾಲದಲ್ಲಿ ಅನ್ವೇಷಿಸಿ",
-            "lbl_biz": "ನಿರ್ದಿಷ್ಟ ವಲಯವನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ",
-            "btn_rep": "ಸಲಹಾ ವರದಿಯನ್ನು ರಚಿಸಿ",
+            "lbl_cat": "ವ್ಯಾಪಾರ ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+            "btn_rep": "AI ವ್ಯಾಪಾರ ಕಲ್ಪನೆಗಳನ್ನು ರಚಿಸಿ",
             "h_fin": "ಹಣಕಾಸಿನ ಕಾರ್ಯಸಾಧ್ಯತೆ ಮತ್ತು DSCR ಕ್ಯಾಲ್ಕುಲೇಟರ್",
             "lbl_cost": "ಒಟ್ಟು ಯೋಜನಾ ವೆಚ್ಚ (₹)",
             "lbl_contrib": "ಸ್ವಂತ ಕೊಡುಗೆ (₹)",
@@ -244,19 +241,18 @@ else:
         },
         "తెలుగు (Telugu)": {
             "sub": "సూక్ష్మ పారిశ్రామికవేత్తల కోసం డిజిటల్ బిజినెస్ అడ్వైజర్ & ప్రభుత్వ పథకాల మ్యాచ్ఛర్",
-            "tab1": "🤖 రంగం & పథకం ఇంటెలిజెన్స్",
+            "tab1": "🤖 AI రంగం & పథకం ఇంటెలిజెన్స్",
             "tab2": "📊 ఫైనాన్షియల్ సిమ్యులేటర్",
             "tab3": "📂 సేవ్ చేసిన రికార్డ్స్",
             "tab4": "📈 వ్యాపార లెడ్జర్",
             "tab5": "💬 AIసారథి చాట్",
-            "h_market": "ప్రాంతీయ మార్కెట్ ఇంటెలిజెన్స్ & పథకాల అన్వేషణ",
+            "h_market": "ప్రాంతీయ AI మార్కెట్ ఇంటెలిజెన్స్ & బహుళ-ఆలోచనల అన్వేషణ",
             "lbl_state": "రాష్ట్ర ప్రాంతం",
             "lbl_dist": "జిల్లా ఎంపిక",
             "lbl_cap": "గరిష్ట మూలధన పెట్టుబడి (₹)",
             "lbl_skill": "పారిశ్రామికవేత్త నైపుణ్య స్థాయి",
-            "chk_all": "🔍 అన్ని వ్యాపార రంగాలను ఒకేసారి అన్వేషించండి",
-            "lbl_biz": "నిర్దిష్ట రంగాన్ని ఫిల్టర్ చేయండి",
-            "btn_rep": "సలహా నివేదికను రూపొందించండి",
+            "lbl_cat": "వ్యాపార వర్గాన్ని ఎంచుకోండి",
+            "btn_rep": "AI వ్యాపార ఆలోచనలను రూపొందించండి",
             "h_fin": "ఆర్థిక సాధ్యత & DSCR కాలిక్యులేటర్",
             "lbl_cost": "మొత్తం ప్రాజెక్ట్ ఖర్చు (₹)",
             "lbl_contrib": "స్వంత పెట్టుబడి (₹)",
@@ -279,19 +275,18 @@ else:
         },
         "தமிழ் (Tamil)": {
             "sub": "நுண் தொழில் முனைவோருக்கான டிஜிட்டல் வணிக ஆலோசகர் மற்றும் அரசு திட்டப் பொருத்துபவர்",
-            "tab1": "🤖 துறை & திட்டம் நுண்ணறிவு",
+            "tab1": "🤖 AI துறை & திட்டம் நுண்ணறிவு",
             "tab2": "📊 நிதி சிமுலேட்டர்",
             "tab3": "📂 சேமிக்கப்பட்ட பதிவுகள்",
             "tab4": "📈 வணிக ஏடு",
             "tab5": "💬 AI சாரதி அரட்டை",
-            "h_market": "பிராந்திய சந்தை நுண்ணறிவு & திட்ட கண்டுபிடிப்பு",
+            "h_market": "பிராந்திய AI சந்தை நுண்ணறிவு & பல யோசனை கண்டுபிடிப்பு",
             "lbl_state": "மாநிலப் பகுதி",
             "lbl_dist": "மாவட்டம் தேர்வு",
             "lbl_cap": "அதிகபட்ச மூலதன முதலீடு (₹)",
             "lbl_skill": "தொழில்முனைவோர் திறன் நிலை",
-            "chk_all": "🔍 அனைத்து வணிகத் துறைகளையும் ஒரே நேரத்தில் ஆராயுங்கள்",
-            "lbl_biz": "குறிப்பிட்ட துறையை வடிகட்டவும்",
-            "btn_rep": "ஆலோசனை அறிக்கையை உருவாக்கவும்",
+            "lbl_cat": "வணிக வகையைத் தேர்ந்தெடுக்கவும்",
+            "btn_rep": "AI வணிக யோசனைகளை உருவாக்குங்கள்",
             "h_fin": "நிதி சாத்தியக்கூறு & DSCR கால்குலேட்டர்",
             "lbl_cost": "மொத்த திட்டச் செலவு (₹)",
             "lbl_contrib": "சொந்த முதலீடு (₹)",
@@ -345,32 +340,38 @@ else:
             max_capital = st.number_input(t["lbl_cap"], value=300000, step=10000)
             skill_level = st.selectbox(t["lbl_skill"], ["Unskilled / Beginner", "Semi-Skilled", "Skilled"])
 
-        explore_all = st.checkbox(t["chk_all"], value=True)
-        business_type = None
-        if not explore_all:
-            business_type = st.selectbox(t["lbl_biz"], ["Dairy & Animal Husbandry", "Retail & Grocery Micro-Store", "Handloom & Traditional Handicrafts"])
+        selected_category = st.selectbox(
+            t["lbl_cat"], 
+            ["All Categories", "Agriculture & Allied", "Manufacturing & Handloom", "Retail & Services", "Food Processing & Dairy"]
+        )
 
         if st.button(t["btn_rep"]):
+            payload = {
+                "state": state, 
+                "district": district, 
+                "max_capital": max_capital, 
+                "skill_level": skill_level,
+                "category": selected_category
+            }
             try:
-                res = requests.post(f"{BACKEND_URL}/api/recommend-all-businesses", json={"state": state, "district": district, "max_capital": max_capital, "skill_level": skill_level})
+                res = requests.post(f"{BACKEND_URL}/api/recommend-all-businesses", json=payload)
                 if res.status_code == 200:
                     data = res.json()
-                    st.success(data["region_context"])
+                    st.success(data.get("region_context", f"AI Market Intelligence for {district}, {state}"))
                     
-                    sectors_to_show = data["sectors"]
-                    if not explore_all and business_type:
-                        sectors_to_show = [s for s in data["sectors"] if business_type.lower() in s["business_type"].lower()]
-                        if not sectors_to_show:
-                            sectors_to_show = data["sectors"][:1]
-
-                    for sector in sectors_to_show:
-                        with st.expander(f"📌 {sector['business_type']} — Risk: {sector['risk_to_profit_ratio']}"):
+                    sectors_to_show = data.get("sectors", [])
+                    
+                    if not sectors_to_show:
+                        st.warning("No specific businesses found matching your criteria. Try increasing your maximum capital limit.")
+                    
+                    for idx, sector in enumerate(sectors_to_show):
+                        with st.expander(f"💡 AI Idea #{idx+1}: {sector['business_type']} — Risk: {sector['risk_to_profit_ratio']}"):
                             col_x, col_y = st.columns(2)
                             with col_x:
-                                st.markdown(f"**Best Scheme:** {sector['best_scheme']}")
+                                st.markdown(f"**Best Scheme Match:** {sector['best_scheme']}")
                                 st.markdown(f"**Nodal Agency:** {sector['nodal_agency']}")
                                 st.markdown(f"**Subsidy Benefit:** {sector['scheme_subsidy']}")
-                                st.markdown(f"**Estimated Setup Cost:** {sector['estimated_setup_cost']}")
+                                st.markdown(f"**Estimated Setup Cost:** ₹{sector['estimated_setup_cost']:,.0f}")
                             with col_y:
                                 st.markdown(f"**Active Regional Units:** {sector['active_units']}")
                                 st.markdown(f"**Regional Growth:** {sector['regional_growth']}")
@@ -378,12 +379,12 @@ else:
                             st.divider()
                             sc1, sc2 = st.columns(2)
                             with sc1:
-                                st.markdown("✅ **Pros:**")
-                                for pro in sector['pros']:
+                                st.markdown("✅ **Market Advantages / Pros:**")
+                                for pro in sector.get('pros', []):
                                     st.markdown(f"- {pro}")
                             with sc2:
-                                st.markdown("❌ **Cons / Risks:**")
-                                for con in sector['cons']:
+                                st.markdown("❌ **Challenges / Risks:**")
+                                for con in sector.get('cons', []):
                                     st.markdown(f"- {con}")
                 else:
                     st.error("Could not fetch recommendations from server.")

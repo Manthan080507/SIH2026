@@ -109,7 +109,6 @@ def login(user: UserAuth):
 
 @app.post("/api/recommend-all-businesses")
 def recommend_businesses(req: RecommendationRequest):
-    # Expanded master pool with multiple distinct ideas per category tailored to regional factors
     master_pool = [
         # --- Agriculture & Allied ---
         {
@@ -195,7 +194,7 @@ def recommend_businesses(req: RecommendationRequest):
             "scheme_subsidy": "Toolkit incentive up to ₹15,000 + Low interest credit",
             "estimated_setup_cost": 90000,
             "active_units": f"210+ digital kiosks in {req.district}",
-            "regional_growth": "+25.4% digital service adoption in {req.state}",
+            "regional_growth": f"+25.4% digital service adoption in {req.state}",
             "competitor_health": "Essential utility requirement",
             "pros": ["Multiple transaction revenue streams", "Constant daily footfall"],
             "cons": ["Internet connectivity dependency", "Local kiosk competition"]
@@ -246,10 +245,7 @@ def recommend_businesses(req: RecommendationRequest):
         }
     ]
 
-    # Filter by category if selected
     filtered = [b for b in master_pool if req.category == "All Categories" or b["category"] == req.category]
-    
-    # Filter by capital constraint
     filtered = [b for b in filtered if b["estimated_setup_cost"] <= req.max_capital]
 
     if not filtered:
@@ -328,12 +324,16 @@ def get_records(username: str):
 @app.post("/api/ai-chat")
 def ai_chat(req: ChatRequest):
     msg = req.message.lower()
-    if "loan" in msg or "mudra" in msg or "money" in msg:
+    if "loan" in msg or "mudra" in msg or "money" in msg or "credit" in msg:
         reply = "For micro-enterprises, government schemes like PM Mudra Yojana or NBCFDC concessional loans offer low-interest financing ranging from ₹50,000 to ₹10 Lakhs with easy repayment tenures."
-    elif "subsidy" in msg or "scheme" in msg:
-        reply = "Central and state schemes provide capital subsidies between 25% to 50% depending on the sector (such as food processing or handlooms) and your district category."
-    elif "document" in msg or "apply" in msg:
+    elif "subsidy" in msg or "scheme" in msg or "fund" in msg:
+        reply = "Central and state schemes provide capital subsidies between 25% to 50% depending on the sector (such as food processing, dairy, or handlooms) and your district category."
+    elif "document" in msg or "apply" in msg or "process" in msg:
         reply = "Standard documentation required includes your Aadhaar Card, PAN Card, passport-size photos, bank statement for the last 6 months, project report, and proof of business address."
+    elif "business" in msg or "idea" in msg or "suggest" in msg or "start" in msg or "open" in msg:
+        reply = f"Great initiative, {req.username}! To find the best options, head over to **Tab 1 (AI Sector & Scheme Intelligence)** where you can enter your state, district, and capital limit to get tailored local business recommendations instantly."
+    elif "hello" in msg or "hi" in msg or "hey" in msg or "namaste" in msg:
+        reply = f"Namaste {req.username}! I am your GraminSarthi AI guide. How can I assist you with your business plans or government schemes today?"
     else:
-        reply = f"Hello {req.username}! As your GraminSarthi AI Advisor, I recommend exploring high-growth sectors in Tab 1 and verifying your cash flow using Tab 2's DSCR financial calculator."
+        reply = f"That's a great question regarding '{req.message}'. You can explore custom regional business ideas in Tab 1, check your loan cash-flow viability in Tab 2, or ask me about loans, subsidies, and application paperwork!"
     return {"reply": reply}
